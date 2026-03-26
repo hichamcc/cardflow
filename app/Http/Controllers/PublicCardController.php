@@ -83,13 +83,13 @@ class PublicCardController extends Controller
             ->firstOrFail();
 
         $qrCode = QrCode::size(400)
-            ->format('png')
+            ->format('svg')
             ->generate($card->getPublicUrl());
 
-        $filename = str_replace(' ', '_', $card->full_name) . '_qr.png';
+        $filename = str_replace(' ', '_', $card->full_name) . '_qr.svg';
 
         return response($qrCode)
-            ->header('Content-Type', 'image/png')
+            ->header('Content-Type', 'image/svg+xml')
             ->header('Content-Disposition', "attachment; filename=\"{$filename}\"");
     }
 }
