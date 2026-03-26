@@ -7,9 +7,6 @@
                 <p class="text-gray-500 dark:text-gray-400">Unlock powerful features to grow your network.</p>
             </div>
 
-            <div class="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-300 text-center">
-                Paid plans are coming soon. You're currently on the <strong>{{ ucfirst($user->subscription_tier) }}</strong> plan.
-            </div>
 
             <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                 {{-- Pro Plan --}}
@@ -40,9 +37,9 @@
                             Current Plan
                         </div>
                     @else
-                        <div class="w-full text-center py-3 rounded-xl bg-gray-100 text-gray-400 text-sm font-semibold dark:bg-gray-800 dark:text-gray-500 cursor-not-allowed">
-                            Coming Soon
-                        </div>
+                        <x-paddle-button :checkout="$proCheckout" class="block w-full text-center py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/25 cursor-pointer">
+                            Subscribe to Pro
+                        </x-paddle-button>
                     @endif
                 </div>
 
