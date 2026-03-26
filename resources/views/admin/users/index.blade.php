@@ -5,6 +5,12 @@
             <x-subheading>{{ __('Browse and manage all users') }}</x-subheading>
         </div>
 
+        @if (session('success'))
+            <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300">
+                {{ session('success') }}
+            </div>
+        @endif
+
         {{-- Filters --}}
         <form method="GET" class="flex flex-wrap gap-3">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Search users..." class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-white">
@@ -69,7 +75,20 @@
                                 <td class="px-5 py-3 text-sm text-gray-500">{{ $user->business_cards_count }}</td>
                                 <td class="px-5 py-3 text-sm text-gray-500">{{ $user->created_at->format('M j, Y') }}</td>
                                 <td class="px-5 py-3 text-right">
-                                    <a href="{{ route('admin.users.show', $user) }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400">View</a>
+                                    <div class="flex items-center justify-end gap-3">
+                                        @if ($user->subscription_tier === 'pro')
+                                            <form action="{{ route('admin.users.make-free', $user) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="text-xs font-medium text-amber-600 hover:text-amber-800 dark:text-amber-400">Make Free</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('admin.users.make-pro', $user) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="text-xs font-medium text-purple-600 hover:text-purple-800 dark:text-purple-400">Make Pro</button>
+                                            </form>
+                                        @endif
+                                        <a href="{{ route('admin.users.show', $user) }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400">View</a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

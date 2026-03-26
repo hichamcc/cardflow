@@ -84,6 +84,20 @@ class AdminUserController extends Controller
         return back()->with('success', 'User has been activated.');
     }
 
+    public function makePro(User $user): RedirectResponse
+    {
+        $user->update(['subscription_tier' => 'pro']);
+
+        return back()->with('success', "{$user->name} has been granted Pro access.");
+    }
+
+    public function makeFree(User $user): RedirectResponse
+    {
+        $user->update(['subscription_tier' => 'free']);
+
+        return back()->with('success', "{$user->name} has been moved to Free.");
+    }
+
     public function impersonate(User $user): RedirectResponse
     {
         session(['impersonating_from' => Auth::id()]);

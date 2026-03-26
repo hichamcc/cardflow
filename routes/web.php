@@ -148,6 +148,8 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::post('users/{user}/suspend', [AdminUserController::class, 'suspend'])->name('users.suspend');
     Route::post('users/{user}/activate', [AdminUserController::class, 'activate'])->name('users.activate');
     Route::post('users/{user}/impersonate', [AdminUserController::class, 'impersonate'])->name('users.impersonate');
+    Route::post('users/{user}/make-pro', [AdminUserController::class, 'makePro'])->name('users.make-pro');
+    Route::post('users/{user}/make-free', [AdminUserController::class, 'makeFree'])->name('users.make-free');
 
     // Support Tickets
     Route::get('tickets', [AdminTicketController::class, 'index'])->name('tickets.index');

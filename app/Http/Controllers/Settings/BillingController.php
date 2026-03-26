@@ -23,16 +23,8 @@ class BillingController extends Controller
     {
         $user = $request->user();
 
-        $proCheckout = $user->checkout(config('services.paddle.price_pro_monthly'))
-            ->customData(['user_id' => $user->id]);
-
-        $businessCheckout = $user->checkout(config('services.paddle.price_business_monthly'))
-            ->customData(['user_id' => $user->id]);
-
         return view('upgrade', [
             'user' => $user,
-            'proCheckout' => $proCheckout,
-            'businessCheckout' => $businessCheckout,
         ]);
     }
 
