@@ -113,7 +113,11 @@ class BusinessCardController extends Controller
 
         $card->load(['socialLinks', 'customFields']);
 
-        return view('cards.show', compact('card'));
+        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(180)
+            ->format('svg')
+            ->generate($card->getPublicUrl());
+
+        return view('cards.show', compact('card', 'qrCode'));
     }
 
     public function edit(Request $request, BusinessCard $card): View

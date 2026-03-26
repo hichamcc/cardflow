@@ -19,135 +19,39 @@
         </div>
 
         <div class="grid gap-6 lg:grid-cols-3">
-            {{-- Card Preview (2 cols) --}}
-            <div class="lg:col-span-2 space-y-6">
-                {{-- Main Card Preview --}}
-                <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
-                    {{-- Theme Banner --}}
-                    <div class="relative h-32" style="background: linear-gradient(135deg, {{ $card->theme_color }}, {{ $card->theme_color }}cc)">
-                        @if($card->getCompanyLogoUrl())
-                            <img src="{{ $card->getCompanyLogoUrl() }}" alt="{{ $card->company_name }}" class="absolute bottom-3 right-4 h-10 w-10 rounded-lg bg-white/90 object-contain p-1 shadow-sm">
-                        @endif
-                    </div>
+            {{-- Mobile Preview (2 cols) --}}
+            <div class="lg:col-span-2 flex flex-col items-center justify-start">
+                <p class="mb-4 text-xs font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">{{ __('Mobile Preview') }}</p>
 
-                    <div class="relative px-6 pb-6">
-                        {{-- Profile Photo --}}
-                        <div class="-mt-12 mb-4">
-                            @if($card->getProfilePhotoUrl())
-                                <img src="{{ $card->getProfilePhotoUrl() }}" alt="{{ $card->full_name }}" class="h-24 w-24 rounded-xl border-4 border-white object-cover shadow-sm dark:border-gray-900">
-                            @else
-                                <div class="flex h-24 w-24 items-center justify-center rounded-xl border-4 border-white text-2xl font-bold text-white shadow-sm dark:border-gray-900" style="background-color: {{ $card->theme_color }}">
-                                    {{ strtoupper(substr($card->full_name, 0, 2)) }}
-                                </div>
-                            @endif
+                {{-- Phone Frame --}}
+                <div class="relative mx-auto" style="width: 320px;">
+                    {{-- Phone shell --}}
+                    <div class="relative rounded-[3rem] border-[8px] border-gray-800 dark:border-gray-600 bg-gray-800 dark:bg-gray-600 shadow-2xl shadow-black/30">
+                        {{-- Notch --}}
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 h-6 w-28 rounded-b-2xl bg-gray-800 dark:bg-gray-600 z-10"></div>
+                        {{-- Side buttons --}}
+                        <div class="absolute -right-3 top-24 h-12 w-1.5 rounded-full bg-gray-700 dark:bg-gray-500"></div>
+                        <div class="absolute -left-3 top-20 h-8 w-1.5 rounded-full bg-gray-700 dark:bg-gray-500"></div>
+                        <div class="absolute -left-3 top-32 h-8 w-1.5 rounded-full bg-gray-700 dark:bg-gray-500"></div>
+                        {{-- Screen --}}
+                        <div class="overflow-hidden rounded-[2.4rem] bg-black" style="height: 580px;">
+                            <iframe
+                                src="{{ route('public.card.show', $card->slug) }}"
+                                class="w-full h-full border-0"
+                                title="{{ __('Card Preview') }}"
+                                loading="lazy"
+                                sandbox="allow-same-origin allow-scripts"
+                            ></iframe>
                         </div>
-
-                        {{-- Name & Title --}}
-                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">{{ $card->full_name }}</h2>
-                        @if($card->job_title)
-                            <p class="mt-0.5 text-sm font-medium" style="color: {{ $card->theme_color }}">{{ $card->job_title }}</p>
-                        @endif
-                        @if($card->company_name)
-                            <p class="mt-0.5 text-sm text-gray-600 dark:text-gray-400">{{ $card->company_name }}</p>
-                        @endif
-
-                        {{-- Bio --}}
-                        @if($card->bio)
-                            <p class="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{{ $card->bio }}</p>
-                        @endif
-
-                        {{-- Contact Info --}}
-                        <div class="mt-5 space-y-2.5">
-                            @if($card->email)
-                                <div class="flex items-center gap-3 text-sm">
-                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg" style="background-color: {{ $card->theme_color }}15">
-                                        <x-phosphor-envelope class="h-4 w-4" style="color: {{ $card->theme_color }}" />
-                                    </div>
-                                    <a href="mailto:{{ $card->email }}" class="text-gray-700 hover:underline dark:text-gray-300">{{ $card->email }}</a>
-                                </div>
-                            @endif
-                            @if($card->phone)
-                                <div class="flex items-center gap-3 text-sm">
-                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg" style="background-color: {{ $card->theme_color }}15">
-                                        <x-phosphor-phone class="h-4 w-4" style="color: {{ $card->theme_color }}" />
-                                    </div>
-                                    <a href="tel:{{ $card->phone }}" class="text-gray-700 hover:underline dark:text-gray-300">{{ $card->phone }}</a>
-                                </div>
-                            @endif
-                            @if($card->website)
-                                <div class="flex items-center gap-3 text-sm">
-                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg" style="background-color: {{ $card->theme_color }}15">
-                                        <x-phosphor-globe class="h-4 w-4" style="color: {{ $card->theme_color }}" />
-                                    </div>
-                                    <a href="{{ $card->website }}" target="_blank" rel="noopener" class="text-gray-700 hover:underline dark:text-gray-300">{{ $card->website }}</a>
-                                </div>
-                            @endif
-                        </div>
-
-                        {{-- Social Links --}}
-                        @if($card->socialLinks->isNotEmpty())
-                            <div class="mt-5 border-t border-gray-100 pt-5 dark:border-gray-800">
-                                <h4 class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">{{ __('Social') }}</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    @foreach($card->socialLinks as $link)
-                                        <a href="{{ $link->url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800" title="{{ $link->link_clicks }} clicks">
-                                            @switch($link->platform)
-                                                @case('linkedin')
-                                                    <x-phosphor-linkedin-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('twitter')
-                                                    <x-phosphor-x-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('instagram')
-                                                    <x-phosphor-instagram-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('facebook')
-                                                    <x-phosphor-facebook-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('github')
-                                                    <x-phosphor-github-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('youtube')
-                                                    <x-phosphor-youtube-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('tiktok')
-                                                    <x-phosphor-tiktok-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('dribbble')
-                                                    <x-phosphor-dribbble-logo class="h-4 w-4" />
-                                                    @break
-                                                @case('behance')
-                                                    <x-phosphor-behance-logo class="h-4 w-4" />
-                                                    @break
-                                                @default
-                                                    <x-phosphor-link class="h-4 w-4" />
-                                            @endswitch
-                                            {{ ucfirst($link->platform) }}
-                                            @if($link->link_clicks > 0)
-                                                <span class="ml-1 inline-flex items-center rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">{{ $link->link_clicks }}</span>
-                                            @endif
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-
-                        {{-- Custom Fields --}}
-                        @if($card->customFields->isNotEmpty())
-                            <div class="mt-5 border-t border-gray-100 pt-5 dark:border-gray-800">
-                                <h4 class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">{{ __('Additional Info') }}</h4>
-                                <div class="space-y-2">
-                                    @foreach($card->customFields as $field)
-                                        <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-800">
-                                            <span class="text-xs font-medium text-gray-500 dark:text-gray-400">{{ $field->field_name }}</span>
-                                            <span class="text-sm text-gray-900 dark:text-white">{{ $field->field_value }}</span>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
                     </div>
+                    {{-- Bottom bar --}}
+                    <div class="mx-auto mt-3 h-1 w-24 rounded-full bg-gray-300 dark:bg-gray-600"></div>
                 </div>
+
+                <a href="{{ route('public.card.show', $card->slug) }}" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400">
+                    <x-phosphor-arrow-square-out class="h-3.5 w-3.5" />
+                    {{ __('Open public page') }}
+                </a>
             </div>
 
             {{-- Sidebar --}}
@@ -195,29 +99,24 @@
                             </div>
                         </div>
 
-                        {{-- QR Code --}}
+                        {{-- QR Code inline toggle --}}
                         <div x-data="{ showQr: false }">
-                            <button type="button" @click="showQr = true" class="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
-                                <x-phosphor-qr-code class="h-4 w-4" />
-                                {{ __('View QR Code') }}
+                            <button type="button" @click="showQr = !showQr" class="flex w-full items-center justify-between gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+                                <span class="flex items-center gap-2">
+                                    <x-phosphor-qr-code class="h-4 w-4" />
+                                    {{ __('Show QR Code') }}
+                                </span>
+                                <x-phosphor-caret-down class="h-4 w-4 transition-transform duration-200" ::class="showQr ? 'rotate-180' : ''" />
                             </button>
 
-                            {{-- QR Modal --}}
-                            <div x-show="showQr" x-cloak x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center p-4" @keydown.escape.window="showQr = false">
-                                <div class="fixed inset-0 bg-black/50" @click="showQr = false"></div>
-                                <div class="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-900" @click.stop>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ __('QR Code') }}</h3>
-                                        <button type="button" @click="showQr = false" class="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300">
-                                            <x-phosphor-x class="h-5 w-5" />
-                                        </button>
+                            <div x-show="showQr" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                                <div class="mt-2 rounded-xl border border-gray-100 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                                    <div class="flex justify-center [&_svg]:w-full [&_svg]:h-auto">
+                                        {!! $qrCode !!}
                                     </div>
-                                    <div class="flex justify-center rounded-xl bg-gray-50 p-6 dark:bg-gray-800">
-                                        <img src="{{ route('public.card.qr', $card->slug) }}" alt="{{ __('QR Code for :name', ['name' => $card->full_name]) }}" class="w-48 h-48">
-                                    </div>
-                                    <p class="mt-3 text-center text-xs text-gray-500 dark:text-gray-400">{{ __('Scan to view this card') }}</p>
-                                    <a href="{{ route('public.card.qr', $card->slug) }}" download="{{ $card->slug }}-qr.png" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
-                                        <x-phosphor-download-simple class="h-4 w-4" />
+                                    <p class="mt-2 text-center text-xs text-gray-400 dark:text-gray-500">{{ __('Scan to view this card') }}</p>
+                                    <a href="{{ route('public.card.qr', $card->slug) }}" download="{{ $card->slug }}-qr.svg" class="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+                                        <x-phosphor-download-simple class="h-3.5 w-3.5" />
                                         {{ __('Download QR') }}
                                     </a>
                                 </div>
