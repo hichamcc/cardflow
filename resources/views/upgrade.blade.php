@@ -42,15 +42,18 @@
                             Current Plan
                         </div>
                     @else
-                        <x-paddle-button :checkout="$proCheckout" class="w-full text-center py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/25 cursor-pointer">
+                        <x-paddle-button :checkout="$proCheckout" class="block w-full text-center py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/25 cursor-pointer">
                             Subscribe to Pro
                         </x-paddle-button>
                     @endif
                 </div>
 
                 {{-- Business Plan --}}
-                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-7">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Business</h3>
+                <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-7 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span class="px-3 py-1 rounded-full bg-gray-500 text-white text-xs font-bold uppercase tracking-wider">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2">Business</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 mb-4">For teams that grow together</p>
 
                     <div class="mb-6">
@@ -67,15 +70,9 @@
                         @endforeach
                     </ul>
 
-                    @if ($user->subscription_tier === 'business')
-                        <div class="w-full text-center py-3 rounded-xl bg-gray-100 text-gray-500 text-sm font-semibold dark:bg-gray-800 dark:text-gray-400">
-                            Current Plan
-                        </div>
-                    @else
-                        <x-paddle-button :checkout="$businessCheckout" class="w-full text-center py-3 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-gray-800 transition-colors cursor-pointer dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100">
-                            Subscribe to Business
-                        </x-paddle-button>
-                    @endif
+                    <div class="w-full text-center py-3 rounded-xl bg-gray-100 text-gray-400 text-sm font-semibold dark:bg-gray-800 dark:text-gray-500 cursor-not-allowed">
+                        Coming Soon
+                    </div>
                 </div>
             </div>
 

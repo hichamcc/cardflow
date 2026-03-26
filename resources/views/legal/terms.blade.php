@@ -31,13 +31,18 @@
     <nav class="fixed top-0 w-full bg-cream-100/80 backdrop-blur-xl z-50 border-b border-cream-300/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <a href="/" class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center">
-                        <svg class="w-4.5 h-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-                        </svg>
-                    </div>
-                    <span class="text-lg font-bold text-navy-900">BsnCard</span>
+                <a href="/" class="flex items-center gap-2">
+                    <svg width="32" height="30" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="rotate(-14 19 18)"><rect x="6" y="7" width="22" height="16" rx="3" fill="#9CA3AF" opacity="0.3"/></g>
+                        <g transform="rotate(-5 19 18)"><rect x="5" y="8" width="22" height="16" rx="3" fill="#3B82F6" opacity="0.3"/></g>
+                        <g transform="rotate(5 19 18)">
+                            <rect x="5" y="10" width="22" height="16" rx="3" fill="#3B82F6"/>
+                            <rect x="8.5" y="14" width="10" height="2" rx="1" fill="white" opacity="0.8"/>
+                            <rect x="8.5" y="17.5" width="6.5" height="1.5" rx="0.75" fill="white" opacity="0.4"/>
+                            <rect x="8.5" y="20.5" width="8" height="1.5" rx="0.75" fill="white" opacity="0.4"/>
+                        </g>
+                    </svg>
+                    <span class="text-lg font-bold text-navy-900">bsn<span class="text-brand-500">Card</span></span>
                 </a>
                 <div class="flex items-center gap-3">
                     @if (Route::has('login'))
@@ -65,7 +70,7 @@
 
                 <section>
                     <h2 class="text-lg font-bold text-navy-900 mb-3">1. Acceptance of Terms</h2>
-                    <p>By accessing or using BsnCard ("Service"), operated by BsnCard ("we", "us", or "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.</p>
+                    <p>By accessing or using BsnCard ("Service"), operated by code by hicham ("we", "us", or "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.</p>
                 </section>
 
                 <section>
@@ -117,7 +122,7 @@
 
                 <section>
                     <h2 class="text-lg font-bold text-navy-900 mb-3">7. Intellectual Property</h2>
-                    <p>The Service, including its design, features, code, and branding, is owned by BsnCard and protected by intellectual property laws. You retain ownership of any content you upload (photos, text, logos). By uploading content, you grant us a limited license to display and process it as part of the Service.</p>
+                    <p>The Service, including its design, features, code, and branding, is owned by code by hicham and protected by intellectual property laws. You retain ownership of any content you upload (photos, text, logos). By uploading content, you grant us a limited license to display and process it as part of the Service.</p>
                 </section>
 
                 <section>
@@ -140,7 +145,7 @@
 
                 <section>
                     <h2 class="text-lg font-bold text-navy-900 mb-3">11. Limitation of Liability</h2>
-                    <p>To the maximum extent permitted by law, BsnCard shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or business opportunities, arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
+                    <p>To the maximum extent permitted by law, code by hicham shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or business opportunities, arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
                 </section>
 
                 <section>

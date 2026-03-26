@@ -48,6 +48,7 @@ Route::view('/privacy', 'legal.privacy')->name('legal.privacy');
 Route::view('/refund', 'legal.refund')->name('legal.refund');
 
 // Public contact form
+Route::view('/contact', 'contact')->name('contact');
 Route::post('/contact', [ContactFormController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
