@@ -864,7 +864,7 @@
             // Name
             ctx.fillStyle = '#ffffff';
             ctx.font = '800 30px Inter, sans-serif';
-            ctx.fillText('Sarah Chen', 32, 100);
+            ctx.fillText('DR. Kevin', 32, 100);
 
             // Title
             ctx.fillStyle = 'rgba(255,255,255,0.5)';
