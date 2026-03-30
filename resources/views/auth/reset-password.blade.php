@@ -5,7 +5,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
 
-    <x-form method="post" action="{{ route('password.store', $request->token) }}" class="space-y-5">
+    <x-form method="post" action="{{ route('password.store') }}" class="space-y-5">
+        <input type="hidden" name="token" value="{{ $request->token }}">
+
         <!-- Email Address -->
         <x-input
             type="email"

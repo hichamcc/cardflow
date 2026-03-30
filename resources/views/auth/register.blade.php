@@ -36,6 +36,7 @@
             autocomplete="new-password"
             placeholder="Create a password"
         />
+        <p class="text-xs text-gray-400 dark:text-gray-500 -mt-3">Must be at least 8 characters.</p>
 
         <!-- Confirm Password -->
         <x-input
