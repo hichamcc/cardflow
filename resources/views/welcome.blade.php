@@ -790,7 +790,6 @@
             </div>
             <div class="border-t border-gray-100 pt-8 text-center">
                 <p class="text-sm text-gray-400">&copy; {{ date('Y') }} BsnCard. All rights reserved.</p>
-                <a href="https://fazier.com/launches/bsncard.com" target="_blank"><img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=light" width=120 alt="Fazier badge" /></a>
             </div>
             <div class="text-center border-t border-gray-800 pt-4"><p class="text-gray-400 text-sm">Created with ❤️ by<!-- --> <a href="https://codebyhicham.com/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">CodeByHicham</a></p></div>
         </div>

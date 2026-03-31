@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\BusinessCardController;
 use App\Http\Controllers\ContactBulkActionController;
+use App\Http\Controllers\CompareController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\ContactImportExportController;
 use App\Http\Controllers\DashboardController;
@@ -46,6 +47,10 @@ Route::get('/logo-preview', fn () => view('logo-preview'));
 Route::view('/terms', 'legal.terms')->name('legal.terms');
 Route::view('/privacy', 'legal.privacy')->name('legal.privacy');
 Route::view('/refund', 'legal.refund')->name('legal.refund');
+
+// Comparison / SEO pages
+Route::get('/compare', [CompareController::class, 'index'])->name('compare.index');
+Route::get('/compare/bsncard-vs-{slug}', [CompareController::class, 'show'])->name('compare.show');
 
 // Public contact form
 Route::view('/contact', 'contact')->name('contact');
