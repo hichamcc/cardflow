@@ -6,6 +6,13 @@
     <x-auth-session-status class="text-center" :status="session('status')" />
 
     <x-form method="post" :action="route('register')" class="space-y-5">
+        <!-- Honeypot: hidden from real users, bots tend to fill every field -->
+        <div class="absolute left-[-9999px]" aria-hidden="true" tabindex="-1">
+            <label for="website">Website</label>
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="form_rendered_at" value="{{ $formRenderedAt }}">
+
         <!-- Name -->
         <x-input
             type="text"

@@ -17,11 +17,26 @@ class RegistrationController extends Controller
 {
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register', [
+            'formRenderedAt' => encrypt(now()->timestamp),
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
+        // Honeypot: real users never see or fill this field; bots that
+        // autofill every input do. Silently pretend registration worked.
+        if (filled($request->input('website'))) {
+            return redirect(route('dashboard', absolute: false));
+        }
+
+        // Timing check: reject submissions faster than a human could
+        // plausibly fill the form (page load -> submit).
+        $renderedAt = rescue(fn () => (int) decrypt($request->input('form_rendered_at')), 0, report: false);
+        if ($renderedAt === 0 || now()->timestamp - $renderedAt < 3) {
+            return redirect(route('dashboard', absolute: false));
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
